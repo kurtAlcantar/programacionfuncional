@@ -258,5 +258,301 @@ En el obtendras todos los programas que realice en clases de programacion funcio
       numeros.forEach((e) => sum += e);
       print(sum);
     }
+---
+### Casting sobre datos numericos 
+    void main() {
+      num a = 4;
+      a as int; //Casting sobre datos numericos
+      print(a.isEven);
+
+      var infInt = 5;
+      var infDouble = 9.81;
+      print("${infInt.runtimeType}");
+      print("${infDouble.runtimeType}");
+
+      num infNum;
+      infNum = 3.6;
+      print("${infNum.runtimeType}");
+      infNum = 5;
+      print("${infNum.runtimeType}");
+    }
+      void main(List<String> args) {
+      int a=5;
+      double b=3.5;
+
+      print(a.toDouble());
+      print(b.toInt());
+      print("el valor es "+a.toString());
+      print("el valor es $a");
+      print(a+b); //Casting implicito, si un dato es entero y el otro                         flotante el resultado es flotante.
+      print(a/b);
+    }
+    void main(List<String> args) {
+      var a = "5";
+      var b = "8.5";
+
+      print(int.parse(a) * 2);
+      print(double.parse(b) * 2);
+
+      var numero = 3.14161213123;
+      print(numero.toStringAsFixed(3));
+    }
+    
+---
+### Funciones numericas
+    void main() {
+      int a = -3000;
+      double b = 9.5;
+      print(a.isNegative);
+      print(b.floor());
+      print(b.ceil());
+      print(b.round());
+      print(b.truncate());
+      print(!b.isNaN);
+    }
+---
+### Operaciones aritmeticas
+    main() {
+      //division
+      print((10 / 3).truncate());
+      print(10 / 3);
+      print(cos(45 * pi / 180));
+      print(sin(45 * pi / 180));
+      print(pow(45, 180));
+      print(max(45, 180));
+      print(min(45, 180));
+    }
+ ---
+ ### Incrementos y decrementos
+     //INCREMENTOS
+    void main(List<String> args) {
+
+     var contador=0;
+
+     contador=contador+1;
+     print(contador);
+     contador+=1;
+     print(contador);
+     contador++;
+     print(contador);
+     ++contador;
+     print(contador);
+
+     var c=10;
+     print(++c);//11
+     c=10;
+     print(c++); //10
+     print(c);
+    }
+    // DECREMENTOS
+    void main(List<String> args) {
+
+      var contador = 0;
+
+      contador = contador - 1;
+      print(contador);
+      contador -= 1;
+      print(contador);
+      contador--;
+      print(contador);
+      --contador;
+      print(contador);
+
+      var c = 10;
+      print(--c); //11
+      c = 10;
+      print(c--); //10
+      print(c);
+    }
+ ---
+ ### Clases y constructores
+       void main() {
+        User usuario = User("Kurt", 15);
+        print(usuario);
+        usuario.reporteUser();
+        print(usuario.nombre);
+        print(usuario.edad);
+        usuario.nombre = "Kurt";
+        usuario.edad = 18;
+
+        User usuario2 = User();
+        usuario2._nombre = "Olga";
+        usuario2.edad = 19;
+        usuario2.reporteUser();
+      }
+
+      //clase es una especie de cascaron.
+
+      //Clase que reperesenta un usueario
+      class User {
+        //Siempre la primera letra del nombre de la clase es en mayuscula
+        ///Propiedad de nombre de tipo string
+        String? _nombre;
+
+        ///Propiedad edad de tipo int
+        int? _edad;
+
+        ///metodo que imprime un usuario
+        void reporteUser() {
+          print(_nombre);
+          print(_edad);
+        }
+
+        User(String nombre, int edad) {
+          this._nombre = nombre;
+          this._edad = edad;
+        }
+
+        void set nombre(String nombre) => _nombre = nombre;
+        String get nombre => _nombre!;
+        void set nombre(String nombre) {
+          _nombre = nombre;
+        }
+
+        void set edad(int edad) {
+          _edad = edad;
+        }
+        void set edad(int edad) => _edad = edad; //=> ES UN FAT ARROW
+        int get edad => _edad!;
+        String get nombre {
+          return _nombre!; // "!" ES PARA OBLIGAR A RETORNAR UN VALOR.
+            }
+         }
+---
+### Clases y constructores con metodos get y setter v1
+    void main() {
+      User usuario = User(nombre: "Kurt", edad: 15);
+      print(usuario.getNombre);
+      print(usuario.getEdad);
+    }
+
+    class User {
+      String? nombre;
+      int? edad;
+      void reporteUser() {
+        print(nombre);
+        print(edad);
+      }
+
+      User({this.nombre, this.edad});
+
+      void set setnombre(String nombre) => nombre = nombre;
+      void set setedad(int edad) => edad = edad; //=> ES UN FAT ARROW
+      String get getNombre => nombre!;
+      int get getEdad => edad!;
+    }
+ --- 
+ ### Clases y constructores con metodos get y setter v2
+     void main() {
+      User usuario = User.nombre("Kurt");
+      User usuario2 = User.edad(15);
+      usuario.reporteUser();
+      usuario2.reporteUser();
+    }
+
+    class User {
+      String? nombre;
+      int? edad;
+      void reporteUser() {
+        print(nombre);
+        print(edad);
+      }
+
+      User.nombre(this.nombre);
+      User.edad(this.edad);
+      void set setNombre(String nombre) => nombre = nombre;
+      void set setEdad(int edad) => edad = edad; //=> ES UN FAT ARROW
+      String get getNombre => nombre!;
+      int get getEdad => edad!;
+    }
+ --- 
+ ### Clases y constructores con metodos getter y setter v3
+     void main() {
+      User usuario = User.nombre("Kurt");
+      User usuario2 = User.edad(15);
+      print(usuario.getNombre);
+      print(usuario2.getEdad);
+    }
+
+    class User {
+      String? _nombre;
+      int? _edad;
+      void reporteUser() {
+        print(_nombre);
+        print(_edad);
+      }
+
+      User.nombre(String nombre) {
+        this._nombre = nombre;
+        this._edad = 0;
+      }
+      User.edad(int edad) {
+        this._edad = edad;
+        this._nombre = "-";
+      }
+      void set setNombre(String nombre) => nombre = nombre;
+      void set setEdad(int edad) => edad = edad; //=> ES UN FAT ARROW
+      String get getNombre => _nombre!;
+      int get getEdad => _edad!;
+    }
+---
+### Pre- Examen, manejo de constructores, clases, metodo getter y setters
+
+    void main() {
+      Vehiculo miNave = Vehiculo(4, "rojo", "ferrari", "2022");
+      print(miNave.getllantas);
+      print(miNave.getColor);
+      print(miNave.getMarca);
+      print(miNave.getModelo);
+
+      miNave.estacionar();
+      miNave.encenderr();
+      miNave.frenar();
+    }
+
+    class Vehiculo {
+      int? _nollantas;
+      String? _marca;
+      String? _modelo;
+      String? _color;
+      String? _automovil;
+
+      void estacionar() {
+        print("Estacionar");
+      }
+
+      void frenar() {
+        print("Frenando");
+      }
+
+      void encenderr() {
+        print("Encendido");
+      }
+
+      Vehiculo(int llantas, String color, String marca, String modelo) {
+        this._nollantas = llantas;
+        this._color = color;
+        this._marca = marca;
+        this._modelo = modelo;
+      }
+
+      void set setLlantas(int llantas) => _nollantas = llantas;
+      int get getllantas => _nollantas!;
+
+      void set setMarca(String marca) => _marca = marca;
+      String get getMarca => _marca!;
+
+      void set setModelo(String modelo) => _modelo = modelo;
+      String get getModelo => _modelo!;
+
+      void set setColor(String color) => _color = color;
+      String get getColor => _color!;
+    }
+
+ 
+
+
+ 
+ 
  
  
